@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
 from dotenv import load_dotenv
 
 
@@ -328,7 +328,11 @@ def learn_execution_pattern(df: pd.DataFrame | None = None) -> dict[str, Any]:
 def _fernet() -> Fernet:
     key = os.getenv("LEARNED_SYSTEM_FERNET_KEY", "").strip()
     if not key:
-        raise RuntimeError("LEARNED_SYSTEM_FERNET_KEY is missing from .env")
+        raise RuntimeError(
+            "LEARNED_SYSTEM_FERNET_KEY is missing from .env. Create that file with the line "
+            "'LEARNED_SYSTEM_FERNET_KEY=<key>' where <key> comes from Fernet.generate_key() "
+            "(see README: Generating a new key)."
+        )
     return Fernet(key.encode("utf-8"))
 
 
@@ -336,7 +340,13 @@ def read_learned_system() -> dict[str, Any]:
     """Decrypt learned_system.json for local API use."""
     if not LEARNED_PATH.exists():
         raise FileNotFoundError("Learned system has not been generated yet.")
-    payload = _fernet().decrypt(LEARNED_PATH.read_bytes())
+    try:
+        payload = _fernet().decrypt(LEARNED_PATH.read_bytes())
+    except InvalidToken as exc:
+        raise RuntimeError(
+            f"{LEARNED_PATH.name} was encrypted with a different key. Delete it and restart "
+            "to re-learn and encrypt with the key in .env."
+        ) from exc
     return json.loads(payload.decode("utf-8"))
 
 

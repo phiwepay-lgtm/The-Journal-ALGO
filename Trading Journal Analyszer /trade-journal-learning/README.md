@@ -23,7 +23,9 @@ uvicorn app:app --reload
 
 Open **http://localhost:8000**. FastAPI serves both the API and the compiled React frontend. API documentation is at **http://localhost:8000/docs**.
 
-The workspace already contains a generated `.env` with a Fernet key. Do not commit or share it. If a new key is needed:
+### Generating the Fernet key
+
+`.env` is git-ignored and is **not** part of the repository, so you must create it once on a fresh clone — the app refuses to learn without it (`LEARNED_SYSTEM_FERNET_KEY is missing from .env`). Generate the key, then do not commit or share the file:
 
 ```bash
 python -c "from pathlib import Path; from cryptography.fernet import Fernet; Path('.env').write_text('LEARNED_SYSTEM_FERNET_KEY=' + Fernet.generate_key().decode() + '\n')"
@@ -61,11 +63,11 @@ Learning runs:
 2. Whenever `/api/patterns/analyze` is called.
 3. Automatically when the local CSV fingerprint changes; the app polls every two seconds.
 
-Outputs:
+Outputs — everything under `data/` is generated locally and git-ignored, so a fresh clone starts with no `data/` directory and the app creates it on first run:
 
 - `data/report.json` — plaintext overall win rate, setup/time breakdowns, common mistakes, and loss reasons.
 - `data/trades.db` — local SQLite mirror of the journal.
-- `data/learned_system.json` — **Fernet-encrypted bytes**, despite the `.json` suffix. Decrypt only with the key in `.env`.
+- `data/learned_system.json` — **Fernet-encrypted bytes**, despite the `.json` suffix. Decrypt only with the key in `.env`, which is why it is never committed.
 - `data/security.log` — blocked Vercel mutation attempts.
 
 The M5 placeholders are:
