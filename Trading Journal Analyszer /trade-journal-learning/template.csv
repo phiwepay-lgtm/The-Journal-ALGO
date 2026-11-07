@@ -1,0 +1,11 @@
+Date,Pair,Direction,Setup,Entry,Stop,Target,Exit,PL_R,Timeframe,Session,Emotion,Mistake,Notes
+2025-01-06,EURUSD,LONG,Breakout,1.0920,1.0890,1.0980,1.0975,1.83,H1,London,Calm,None,Clean break of Asian high
+2025-01-06,GBPUSD,SHORT,FVG,1.2710,1.2740,1.2650,1.2735,-0.83,M15,New York,Anxious,Early entry,Jumped in before confirmation
+2025-01-07,XAUUSD,LONG,OrderBlock,2650.0,2640.0,2680.0,2678.0,2.80,H4,London,Confident,None,Textbook OB retest
+2025-01-07,EURUSD,SHORT,Breakout,1.0940,1.0960,1.0900,1.0945,-0.25,H1,New York,FOMO,Revenge trade,Tried to get back yesterday loss
+2025-01-08,GBPUSD,LONG,FVG,1.2680,1.2660,1.2730,1.2725,2.25,M15,London,Calm,None,Patience paid off
+2025-01-08,XAUUSD,SHORT,Breakout,2675.0,2685.0,2650.0,2682.0,-0.70,H1,New York,Impatient,Moved stop,Moved stop wider mid-trade
+2025-01-09,EURUSD,LONG,FVG,1.0910,1.0895,1.0950,1.0948,2.53,M15,London,Calm,None,Second entry after first SL
+2025-01-09,GBPUSD,SHORT,OrderBlock,1.2730,1.2755,1.2670,1.2750,-0.80,H4,New York,Frustrated,Overleveraged,Doubled lot after 2 losses
+2025-01-10,XAUUSD,LONG,Breakout,2660.0,2648.0,2700.0,2695.0,2.92,H1,London,Confident,None,Let runner run
+2025-01-10,EURUSD,SHORT,FVG,1.0955,1.0970,1.0920,1.0925,2.00,M15,New York,Calm,None,End of week discipline
